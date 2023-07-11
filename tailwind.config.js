@@ -6,10 +6,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'base': '#FFFFFF',
+        'base-color': '#FFFFFF',
         'dark': '#29292E',
         'shadow': '#050206',
         'primary': '#835AFD',
+        'primary-hover': '#6F4BD8',
         'danger': '#E73F5D',
         'light': '#F8F8F8',
         'grey-dark': '#737380',
@@ -17,10 +18,11 @@ module.exports = {
         'grey-light': '#DBDCDD',
       },
       backgroundColor:{
-        'base': '#FFFFFF',
+        'base-color': '#FFFFFF',
         'dark': '#29292E',
         'shadow': '#050206',
         'primary': '#835AFD',
+        'primary-hover': '#6F4BD8',
         'danger': '#E73F5D',
         'light': '#F8F8F8',
         'grey-dark': '#737380',
