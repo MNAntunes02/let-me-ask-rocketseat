@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-pergunta',
@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./pergunta.component.css']
 })
 export class PerguntaComponent {
+
+  @Input() status :string = 'nova';
 
 }
