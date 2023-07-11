@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './pages/home/home.component';
 import { SalaComponent } from './pages/sala/sala.component';
+import { PerguntaComponent } from './public/pergunta/pergunta.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    SalaComponent
+    SalaComponent,
+    PerguntaComponent
   ],
   imports: [
     BrowserModule,

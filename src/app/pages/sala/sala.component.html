@@ -13,11 +13,22 @@
     </div>
 </header>
 
-<section class="px-80 pt-36 bg-light min-h-screen">
-    <h2 class="poppins text-2xl font-bold text-dark">Nome da sala</h2>
-    <div class="w-full py-32 flex flex-col justify-center items-center mt-6 text-center">
+<main class="px-80 pt-36 bg-light min-h-screen">
+    <h2 class="poppins text-2xl font-bold text-dark flex items-center mb-6">
+        Nome da sala 
+        <span class="rounded-full bg-secondary px-4 py-2 text-sm font-medium text-base-color ml-4">4 perguntas</span>
+    </h2>
+    <section class="pb-10">
+        <app-pergunta></app-pergunta>
+        <app-pergunta></app-pergunta>
+        <app-pergunta></app-pergunta>
+        <app-pergunta></app-pergunta>
+        <app-pergunta></app-pergunta>
+        <app-pergunta></app-pergunta>
+    </section>
+    <!-- <div class="w-full py-32 flex flex-col justify-center items-center mt-6 text-center">
         <img src="./assets/Ilustração.svg" alt="">
         <span class="poppins text-lg font-semibold mt-4 text-dark">Nenhuma pergunta por aqui...</span>
         <span class="mt-2 text-sm text-grey-dark">Envie o código desta sala para seus amigos e<br/>comece a responder perguntas!</span>
-    </div>    
-</section>
+    </div>     -->
+</main>
