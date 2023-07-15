@@ -14,16 +14,38 @@
 </header>
 
 <main class="px-80 pt-36 bg-light min-h-screen">
+
     <h2 class="poppins text-2xl font-bold text-dark flex items-center mb-6">
         Nome da sala 
         <span class="rounded-full bg-secondary px-4 py-2 text-sm font-medium text-base-color ml-4">4 perguntas</span>
     </h2>
+
+    <form class="flex flex-col">
+        <div>
+            <textarea class="w-full p-4 rounded-lg min-h-[133px]" placeholder="O que você quer perguntar?" type=""></textarea>
+        </div>
+        <div class="flex justify-between items-center py-4">
+            <div class="flex items-center">
+                <div class="w-8 h-8 rounded-full bg-primary mr-2 flex justify-center items-center">
+                    <img src="./assets/user.svg" alt="">
+                </div>
+                <span>Nathaly Costa</span>
+            </div>
+            <!-- <span>Para enviar uma pergunta,  <span class="text-primary underline cursor-pointer">faça seu login.</span></span> -->
+            <button class="px-8 py-3 rounded-lg bg-primary text-base-color font-medium">Enviar pergunta</button>
+        </div>
+    </form>
+
     <section class="pb-10">
         <app-pergunta status="respondendo"></app-pergunta>
     </section>
+
+    <!-- Usada quando não tem nenhuma pergunta -->
     <!-- <div class="w-full py-32 flex flex-col justify-center items-center mt-6 text-center">
         <img src="./assets/Ilustração.svg" alt="">
         <span class="poppins text-lg font-semibold mt-4 text-dark">Nenhuma pergunta por aqui...</span>
         <span class="mt-2 text-sm text-grey-dark">Envie o código desta sala para seus amigos e<br/>comece a responder perguntas!</span>
-    </div>     -->
+    </div>-->
+
+
 </main>
