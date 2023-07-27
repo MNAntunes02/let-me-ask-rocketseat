@@ -35,19 +35,10 @@ export class SalaComponent {
     const perguntasRef = collection(salaRef,'perguntas')
     this.perguntas$ = collectionData(perguntasRef);
     
-
-    
     this.salas$.subscribe(async (element) => {
-      this.test = element;
-      this.testDoc = (await getDoc(salaRef)).data();
-      // console.log(this.test)
-      // console.log(this.testDoc)
+      this.test = element; //dados de todas as salas
+      this.testDoc = (await getDoc(salaRef)).data(); //dados da sala
     })
-
-    // this.perguntas$.subscribe(async (element) => {
-    //   console.log(element)
-    // })
-
     
 
   }
