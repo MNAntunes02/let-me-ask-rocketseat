@@ -9,14 +9,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './pages/home/home.component';
 import { SalaComponent } from './pages/sala/sala.component';
 import { PerguntaComponent } from './public/pergunta/pergunta.component';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
-import { environment } from '../environments/environment';
+import { LoginComponent } from './pages/login/login.component';
+import { AcessoSalaComponent } from './pages/acesso-sala/acesso-sala.component';
+
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireModule } from '@angular/fire/compat';
 import { provideAnalytics,getAnalytics,ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-import { LoginComponent } from './pages/login/login.component';
-import { AcessoSalaComponent } from './pages/acesso-sala/acesso-sala.component';
+import { environment } from '../environments/environment';
+import { AuthService } from './services/auth.service';
+
 
 @NgModule({
   declarations: [
@@ -28,6 +33,8 @@ import { AcessoSalaComponent } from './pages/acesso-sala/acesso-sala.component';
     AcessoSalaComponent
   ],
   imports: [
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebase),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -39,7 +46,7 @@ import { AcessoSalaComponent } from './pages/acesso-sala/acesso-sala.component';
 
   ],
   providers: [
-    ScreenTrackingService,UserTrackingService
+    ScreenTrackingService,UserTrackingService,AuthService
   ],
   bootstrap: [AppComponent]
 })
