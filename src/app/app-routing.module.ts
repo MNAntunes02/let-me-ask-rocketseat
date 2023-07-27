@@ -2,12 +2,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SalaComponent } from './pages/sala/sala.component';
 import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './pages/login/login.component';
+import { AcessoSalaComponent } from './pages/acesso-sala/acesso-sala.component';
 
 const routes: Routes = [
-  {path: "", component: HomeComponent},
+  {path: "criar-sala", component: HomeComponent},
+  {path: "acesso-sala", component: AcessoSalaComponent},
+  {path: "login", component: LoginComponent},
   {path: "sala", component: SalaComponent},
   {path:'sala/:idgame',component: SalaComponent},
-  {path: "**" , redirectTo: ""}
+  {path: "**" , redirectTo: "login"}
 ];
 
 @NgModule({
