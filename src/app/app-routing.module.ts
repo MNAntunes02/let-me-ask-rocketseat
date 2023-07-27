@@ -10,7 +10,7 @@ const routes: Routes = [
   {path: "acesso-sala", component: AcessoSalaComponent},
   {path: "login", component: LoginComponent},
   {path: "sala", component: SalaComponent},
-  {path:'sala/:idgame',component: SalaComponent},
+  {path:'sala/:idsala',component: SalaComponent},
   {path: "**" , redirectTo: "login"}
 ];
 
