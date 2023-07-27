@@ -19,11 +19,24 @@ export class SalaComponent {
   sala$:any;
   perguntas$:Observable<DocumentData[]|any>;
 
+  currentNome :string|null = '';
+  currentPhoto :string|null = '';
+  currentEmail :string|null = '';
+  
+
   constructor(
     private route : ActivatedRoute,
     private authService : AuthService,
     private firestore: Firestore,
   ){
+
+    this.currentNome = localStorage.getItem('name');
+    this.currentPhoto = localStorage.getItem('photo');
+    this.currentEmail = localStorage.getItem('email');
+    if (this.currentNome !== null) {
+      this.currentNome = this.currentNome.replace(/["]/g, '');
+      // [this.primeiroNome, ...this.resto] = this.currentNome.split(" ");
+    }
 
     this.route.params.subscribe(
       (params: any) => this.idSala = params['idsala']
