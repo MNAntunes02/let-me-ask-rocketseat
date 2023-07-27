@@ -38,8 +38,10 @@
         </div>
     </form>
 
-    <section class="pb-10">
-        <app-pergunta status="nova" ></app-pergunta>
+    <section class="pb-20">
+        <div *ngFor="let pergunta of perguntas$ | async">
+            <app-pergunta [status]="pergunta.status" [conteudoPergunta]="pergunta.conteudoPergunta" [nomeUser]="pergunta.nomeUser" [likes]="pergunta.likes"></app-pergunta>
+        </div>
     </section>
 
 
