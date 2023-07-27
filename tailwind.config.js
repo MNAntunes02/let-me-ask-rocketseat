@@ -13,6 +13,7 @@ module.exports = {
         'primary-hover': '#6F4BD8',
         'secondary': '#E559F9',
         'danger': '#E73F5D',
+        'danger-hover': '#D73754',
         'light': '#F8F8F8',
         'grey-dark': '#737380',
         'grey-medium': '#A8A8B3',
