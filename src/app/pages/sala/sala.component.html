@@ -21,9 +21,9 @@
         <span class="rounded-full bg-secondary px-4 py-2 text-sm font-medium text-base-color ml-4">4 perguntas</span>
     </h2>
 
-    <form class="flex flex-col py-4">
+    <form (submit)="mandarMensagem(inputMensagem.value, $event)" class="flex flex-col py-4">
         <div>
-            <textarea class="w-full p-4 rounded-lg min-h-[133px]" placeholder="O que você quer perguntar?" type=""></textarea>
+            <textarea class="w-full p-4 rounded-lg min-h-[133px]" placeholder="O que você quer perguntar?" type="" #inputMensagem></textarea>
         </div>
         <div class="flex justify-between items-center py-4">
             <div class="flex items-center">
@@ -40,7 +40,11 @@
 
     <section class="pb-20">
         <div *ngFor="let pergunta of perguntas$ | async">
-            <app-pergunta [status]="pergunta.status" [conteudoPergunta]="pergunta.conteudoPergunta" [nomeUser]="pergunta.nomeUser" [likes]="pergunta.likes"></app-pergunta>
+            <app-pergunta   [status]="pergunta.status" 
+                            [conteudoPergunta]="pergunta.conteudoPergunta" 
+                            [nomeUser]="pergunta.nomeUser" 
+                            [likes]="pergunta.likes">
+            </app-pergunta>
         </div>
     </section>
 

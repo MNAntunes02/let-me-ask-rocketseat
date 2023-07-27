@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DocumentData, Firestore, collection, collectionData, doc, getDoc } from '@angular/fire/firestore';
+import { DocumentData, Firestore, collection, collectionData, doc, getDoc, setDoc } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
@@ -13,6 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class SalaComponent {
 
   idSala:string = '';
+  inputValue:string = '';
   test:any;
   testDoc:any;
   salas$:Observable<DocumentData[]|any>;
@@ -22,6 +23,8 @@ export class SalaComponent {
   currentNome :string|null = '';
   currentPhoto :string|null = '';
   currentEmail :string|null = '';
+  primeiroNome :string|null = '';
+  resto : any;
   
 
   constructor(
@@ -58,6 +61,24 @@ export class SalaComponent {
 
   logout(){
     this.authService.logout()
+  }
+
+  async mandarMensagem(mensagem:string, event: Event){
+
+    event.preventDefault();
+
+    const salasRef = collection(this.firestore, 'salas')
+    this.salas$ = collectionData(salasRef)
+    const salaRef = doc(salasRef,this.idSala)
+    const perguntasRef = collection(salaRef,'perguntas')
+    this.perguntas$ = collectionData(perguntasRef);
+
+    await setDoc(doc(perguntasRef), {
+      conteudoPergunta: mensagem,
+      nomeUser: this.currentNome,
+      status: 'nova', 
+      likes: 0,
+    });
   }
 
 
