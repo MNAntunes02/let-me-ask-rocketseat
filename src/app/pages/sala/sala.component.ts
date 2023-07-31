@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { DocumentData, Firestore, collection, collectionData, doc, getDoc, setDoc } from '@angular/fire/firestore';
+import { DocumentData, Firestore, collection, collectionData, collectionGroup, doc, getDoc, getDocs, setDoc } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
 
@@ -13,12 +13,16 @@ import { AuthService } from 'src/app/services/auth.service';
 export class SalaComponent {
 
   idSala:string = '';
-  inputValue:string = '';
-  test:any;
-  testDoc:any;
+  sala:any;
+  salaDoc:any;
+  arrDoc:any = [];
+  arrDocRef:any = [];
+  arrDocData:any = [];
   salas$:Observable<DocumentData[]|any>;
   sala$:any;
   perguntas$:Observable<DocumentData[]|any>;
+  // perguntasAtualizado$:Observable<DocumentData[]|any>;
+  perguntas:any
 
   currentNome :string|null = '';
   currentPhoto :string|null = '';
@@ -46,16 +50,44 @@ export class SalaComponent {
     )
 
     const salasRef = collection(this.firestore, 'salas')
-    this.salas$ = collectionData(salasRef)
-    const salaRef = doc(salasRef,this.idSala)
+    const salaRef = doc(salasRef,"123123")
     const perguntasRef = collection(salaRef,'perguntas')
+    this.salas$ = collectionData(salasRef)
     this.perguntas$ = collectionData(perguntasRef);
+
+    // this.perguntas$.subscribe(async (perguntas) => {
+    //   this.perguntas = await getDocs(perguntasRef);
+    //   this.perguntas.forEach((doc:any) => {
+    //     Object.assign(doc.data(),{id:doc.id})
+    //     console.log(doc.id, " => ", doc.data());
+    //   })
+    // })
+
+    this.perguntas$ = this.perguntas$.pipe(
+      map(async (objeto) => {
+        let arrID:any = []
+        this.perguntas = await getDocs(perguntasRef);
+        this.perguntas.forEach((doc:any) => {
+          arrID.push(doc.id)
+        })
+        objeto.forEach((newdoc:any, index:any)=>{
+          Object.assign(newdoc,{id:arrID[index]})
+        })
+        // console.log(objeto)
+        return objeto; // Retorne o objeto atualizado
+      })
+    );
     
     this.salas$.subscribe(async (element) => {
-      this.test = element; //dados de todas as salas
-      this.testDoc = (await getDoc(salaRef)).data(); //dados da sala
+      this.sala = element; //dados de todas as salas
+      this.salaDoc = (await getDoc(salaRef)).data(); //dados da sala da rota
+    })
+
+    this.perguntas$.subscribe((element)=>{
+      console.log(element)
     })
     
+
 
   }
 
@@ -65,13 +97,12 @@ export class SalaComponent {
 
   async mandarMensagem(mensagem:string, event: Event){
 
-    event.preventDefault();
-
     const salasRef = collection(this.firestore, 'salas')
-    this.salas$ = collectionData(salasRef)
-    const salaRef = doc(salasRef,this.idSala)
+    const salaRef = doc(salasRef,"123123")
     const perguntasRef = collection(salaRef,'perguntas')
+    this.salas$ = collectionData(salasRef)
     this.perguntas$ = collectionData(perguntasRef);
+
 
     await setDoc(doc(perguntasRef), {
       conteudoPergunta: mensagem,
@@ -80,6 +111,5 @@ export class SalaComponent {
       likes: 0,
     });
   }
-
 
 }
