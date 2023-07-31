@@ -22,7 +22,6 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { AuthService } from './services/auth.service';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,10 +32,10 @@ import { AuthService } from './services/auth.service';
     AcessoSalaComponent
   ],
   imports: [
-    AngularFireAuthModule,
-    AngularFireModule.initializeApp(environment.firebase),
     BrowserModule,
     AppRoutingModule,
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebase),
     BrowserAnimationsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
