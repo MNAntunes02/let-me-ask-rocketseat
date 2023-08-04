@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { DocumentData, Firestore, collection, collectionData, deleteDoc, doc, query, updateDoc, where } from '@angular/fire/firestore';
+import { DocumentData, Firestore, collection, collectionData, deleteDoc, doc, getDoc, query, updateDoc, where } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -20,14 +20,41 @@ export class PerguntaComponent {
   salas$:Observable<DocumentData[]|any>|any;
   perguntas$:Observable<DocumentData[]|any>|any;
 
+  sala:any;
+  salaDoc:any;
+
+  currentNome :string|null = '';
+  currentPhoto :string|null = '';
+  currentEmail :string|null = '';
+  primeiroNome :string|null = '';
+  resto : any;
+
   constructor(
     private firestore : Firestore,
     private route : ActivatedRoute
   ){
     
+    this.currentNome = localStorage.getItem('name');
+    this.currentPhoto = localStorage.getItem('photo');
+    this.currentEmail = localStorage.getItem('email');
+    if (this.currentNome !== null) {
+      this.currentNome = this.currentNome.replace(/["]/g, '');
+      // [this.primeiroNome, ...this.resto] = this.currentNome.split(" ");
+    }
+
     this.route.params.subscribe(
       (params: any) => this.idSala = params['idsala']
     )
+
+    const salasRef = collection(this.firestore, 'salas')
+    const salaRef = doc(salasRef,this.idSala)
+    const perguntasRef = collection(salaRef,'perguntas')
+    this.salas$ = collectionData(salasRef)
+
+    this.salas$.subscribe(async (element: any) => {
+      this.sala = element; //dados de todas as salas
+      this.salaDoc = (await getDoc(salaRef)).data(); //dados da sala da rota
+    })
 
   }
 

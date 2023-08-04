@@ -27,6 +27,9 @@ export class AuthService {
   //login com google
   googleSingIn(){
     return this.fireauth.signInWithPopup(new GoogleAuthProvider).then( async res => {
+      localStorage.removeItem('photo');
+      localStorage.removeItem('name');
+      localStorage.removeItem('email');
       localStorage.setItem('photo', JSON.stringify(res.user?.photoURL));
       localStorage.setItem('name', JSON.stringify(res.user?.displayName));
       localStorage.setItem('email', JSON.stringify(res.user?.email));

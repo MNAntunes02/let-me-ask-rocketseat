@@ -9,8 +9,12 @@
             </div>
             <span class="font-medium text-dark">Sala #{{idSala}}</span>
         </div>
-        <div routerLink="/criar-sala" class="border rounded-lg border-primary text-primary bg-light px-6 py-2 font-medium ml-2 cursor-pointer">Encerrar sala</div>
-        <div (click)="logout()" class="border rounded-lg  text-light bg-danger hover:bg-danger-hover transition-colors px-6 py-2 font-medium ml-2 cursor-pointer">Logout</div>
+        <div    routerLink="/criar-sala" 
+                [ngClass]="{'hidden': !(salaDoc.donoSala == currentNome)}"
+        class="border rounded-lg border-primary text-primary bg-light px-6 py-2 font-medium ml-2 cursor-pointer">Encerrar sala</div>
+        <div    (click)="logout()" 
+                [ngClass]="{'hidden': currentNome == null}"
+                class="border rounded-lg  text-light bg-danger hover:bg-danger-hover transition-colors px-6 py-2 font-medium ml-2 cursor-pointer">Logout</div>
     </div>
 </header>
 
@@ -21,7 +25,9 @@
         <span class="rounded-full bg-secondary px-4 py-2 text-sm font-medium text-base-color ml-4">{{nPerguntas}} perguntas</span>
     </h2>
 
-    <form (submit)="mandarMensagem(inputMensagem.value, $event)" class="flex flex-col py-4">
+    <form   (submit)="mandarMensagem(inputMensagem.value, $event)" 
+            [ngClass]="{'hidden': salaDoc.donoSala == currentNome}"
+            class="flex flex-col py-4">
         <div>
             <textarea class="w-full p-4 rounded-lg min-h-[133px]" placeholder="O que você quer perguntar?" type="" #inputMensagem></textarea>
         </div>
@@ -30,11 +36,16 @@
                 <div class="w-8 h-8 rounded-full bg-primary mr-2 flex justify-center items-center">
                     <img src="./assets/user.svg" alt="">
                 </div>
-                <span>{{currentNome}}</span>
+                <div *ngIf="currentNome == null,else Nome">
+                    Para enviar uma pergunta, <a href="/acesso-sala" class="text-primary">faça seu login.</a>
+                </div>
+                <ng-template #Nome>
+                    <span>{{currentNome}}</span>
+                </ng-template>
             </div>
             <!-- Usado quando usario não esta logado não logado -->
             <!-- <span>Para enviar uma pergunta,  <span class="text-primary underline cursor-pointer">faça seu login.</span></span> -->
-            <button class="px-8 py-3 rounded-lg bg-primary hover:bg-primary-hover text-base-color font-medium transition-colors">Enviar pergunta</button>
+            <button [disabled]="currentNome == null" class="px-8 py-3 rounded-lg bg-primary hover:bg-primary-hover text-base-color font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed">Enviar pergunta</button>
         </div>
     </form>
 
