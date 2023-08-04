@@ -13,6 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class SalaComponent {
 
   idSala:string = '';
+  nPerguntas:number = 0;
   sala:any;
   salaDoc:any;
   arrDoc:any = [];
@@ -55,14 +56,6 @@ export class SalaComponent {
     this.salas$ = collectionData(salasRef)
     this.perguntas$ = collectionData(perguntasRef);
 
-    // this.perguntas$.subscribe(async (perguntas) => {
-    //   this.perguntas = await getDocs(perguntasRef);
-    //   this.perguntas.forEach((doc:any) => {
-    //     Object.assign(doc.data(),{id:doc.id})
-    //     console.log(doc.id, " => ", doc.data());
-    //   })
-    // })
-
     this.perguntas$ = this.perguntas$.pipe(
       map(async (objeto) => {
         let arrID:any = []
@@ -73,8 +66,9 @@ export class SalaComponent {
         objeto.forEach((newdoc:any, index:any)=>{
           Object.assign(newdoc,{id:arrID[index]})
         })
+        this.nPerguntas = objeto.length
         // console.log(objeto)
-        return objeto; // Retorne o objeto atualizado
+        return objeto.sort((a:any, b:any) => b.status.localeCompare(a.status)); // Retorne o objeto atualizado
       })
     );
     
@@ -96,6 +90,8 @@ export class SalaComponent {
   }
 
   async mandarMensagem(mensagem:string, event: Event){
+
+    event.preventDefault();
 
     const salasRef = collection(this.firestore, 'salas')
     const salaRef = doc(salasRef,"123123")

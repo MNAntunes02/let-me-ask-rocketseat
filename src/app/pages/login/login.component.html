@@ -6,19 +6,30 @@
     </section>
     <section class="w-1/2 h-full bg-light flex flex-col justify-center items-center">
         <img src="./assets/Logo.svg" alt="">
-        <div class="w-80 flex flex-col justify-center items-center">
-            <span class="poppins text-2xl font-bold mt-14">Fazer o login</span>
+        <div class="w-80 flex flex-col justify-center items-center mt-14">
+            <!-- <span class="poppins text-2xl font-bold">Fazer o login</span>
             <input type="text" name="" id="" placeholder="Email" class="w-full rounded-lg border border-grey-medium p-3 mt-8 bg-white">
             <input type="text" name="" id="" placeholder="Senha" class="w-full rounded-lg border border-grey-medium p-3 mt-4 bg-white">
             <button routerLink="sala" class="w-full rounded-lg p-3 mt-4 bg-primary text-base-color flex justify-center items-center hover:bg-primary-hover">
                 <span>Entrar</span>
-            </button>
-            <div class="flex justify-center text-zinc-400 divide-y-2 w-full items-center gap-5 py-8"> <div class="w-full h-0 border border-zinc-300"></div> ou <div class="w-full h-0 border border-zinc-300"></div> </div>
-            <div (click)="googleSingIn()" class="flex gap-6 p-2 px-3 bg-white rounded drop-shadow justify-center items-center roboto font-medium text-zinc-500 hover:bg-zinc-50 cursor-pointer mb-8">
+            </button> -->
+            <!-- <div class="flex justify-center text-zinc-400 divide-y-2 w-full items-center gap-5 py-8"> <div class="w-full h-0 border border-zinc-300"></div> ou <div class="w-full h-0 border border-zinc-300"></div> </div> -->
+            <div (click)="googleSingIn()" class="flex gap-6 py-4 w-full bg-white rounded-lg drop-shadow justify-center items-center roboto font-medium text-zinc-500 hover:bg-zinc-50 cursor-pointer mb-4">
                 <img  src="./assets/g-logo.png" alt="" class="w-5 h-5">
-                <span>Fazer login com Google</span>
+                <span>Crie sua sala com o Google</span>
             </div>
-            <p class="text-sm text-grey-medium mt-4">Ainda não tem conta na plataforma? <a href="" class="text-primary">Cadastre-se</a></p>
+            <div class="flex justify-center text-zinc-400 w-full items-center gap-5 py-4"> 
+                <div class="w-32 h-0 border border-zinc-300"></div>
+                <div class="w-full text-center">ou entre em uma sala</div>
+                <div class="w-32 h-0 border border-zinc-300"></div> 
+            </div>
+            <input type="text" name="" id="" placeholder="Digite o código da sala" class="w-full rounded-lg border border-grey-medium p-3 mt-4 bg-white">
+            <button routerLink="/sala/123123" class="w-full rounded-lg p-3 mt-4 bg-primary text-base-color flex justify-center items-center hover:bg-primary-hover">
+                <img src="./assets/log-in 1.svg" alt="" class="mr-4">
+                <span>Entrar na sala</span>
+            </button>
+            <!-- <p class="text-sm text-grey-medium mt-4">Ainda não tem conta na plataforma? <a href="" class="text-primary">Cadastre-se</a></p> -->
+            <p class="text-sm text-grey-medium mt-8">Acesse as salas disponiveis <a href="/acesso-sala" class="text-primary">Clicando aqui</a></p>
         </div>
     </section>
 </main>

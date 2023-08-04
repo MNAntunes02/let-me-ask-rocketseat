@@ -24,13 +24,6 @@ export class PerguntaComponent {
     private firestore : Firestore,
     private route : ActivatedRoute
   ){
-
-    // const salasRef = collection(this.firestore, 'salas')
-    // const salaRef = doc(salasRef,this.idSala)
-    // const perguntasRef = collection(salaRef,'perguntas')
-    // this.salas$ = collectionData(salasRef)
-    // this.perguntas$ = collectionData(perguntasRef);
-
     
     this.route.params.subscribe(
       (params: any) => this.idSala = params['idsala']
@@ -46,8 +39,6 @@ export class PerguntaComponent {
     const perguntasRef = collection(salaRef,'perguntas')
     this.perguntas$ = collectionData(perguntasRef);
 
-    
-
     await updateDoc(doc(perguntasRef,this.id), {
       status: action 
     });
@@ -61,10 +52,7 @@ export class PerguntaComponent {
     const perguntasRef = collection(salaRef,'perguntas')
     this.perguntas$ = collectionData(perguntasRef);
 
-    
-
     await deleteDoc(doc(perguntasRef,this.id));
-
   }
 
 }
