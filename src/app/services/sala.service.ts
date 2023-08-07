@@ -16,16 +16,10 @@ export class SalaService {
   arrDoc:any = [];
   arrDocRef:any = [];
   arrDocData:any = [];
-  salas$:Observable<DocumentData[]|any>|any;
+  salas$:Observable<DocumentData[]>|any;
   sala$:any;
-  perguntas$:Observable<DocumentData[]|any>|any;
+  perguntas$:Observable<DocumentData[]>|any;
   perguntas:any
-
-  currentNome :string|null = '';
-  currentPhoto :string|null = '';
-  currentEmail :string|null = '';
-  primeiroNome :string|null = '';
-  resto : any;
 
   constructor(
     private route : ActivatedRoute,
@@ -54,7 +48,7 @@ export class SalaService {
         })
         this.nPerguntas = objeto.length
         // console.log(objeto)
-        return objeto.sort((a:any, b:any) => b.status.localeCompare(a.status)) // Retorne o objeto atualizado
+        return objeto.sort((a:any, b:any) => a.status.localeCompare(b.status)) // Retorne o objeto atualizado
       })
     )
 
@@ -72,7 +66,7 @@ export class SalaService {
     return this.salas$
   }
 
-  async setMensagem(idSala:string, mensagem:string){
+  async setMensagem(idSala:string, mensagem:string, nomeUser:string){
     const salasRef = collection(this.firestore, 'salas')
     const salaRef = doc(salasRef,"123123")
     const perguntasRef = collection(salaRef,'perguntas')
@@ -82,8 +76,8 @@ export class SalaService {
 
     await setDoc(doc(perguntasRef), {
       conteudoPergunta: mensagem,
-      nomeUser: this.currentNome,
-      status: 'nova', 
+      nomeUser: nomeUser,
+      status: '1-nova', 
       likes: 0,
     });
   }

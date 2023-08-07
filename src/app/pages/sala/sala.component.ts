@@ -23,7 +23,6 @@ export class SalaComponent {
   salas$:Observable<DocumentData[]|any>;
   sala$:any;
   perguntas$:Observable<DocumentData[]|any>;
-  // perguntasAtualizado$:Observable<DocumentData[]|any>;
   perguntas:any
 
   currentNome :string|null = '';
@@ -52,20 +51,19 @@ export class SalaComponent {
       (params: any) => this.idSala = params['idsala']
     )
     
+    
     this.salas$ = salaService.getSalas(this.idSala);
     this.perguntas$ = salaService.getPerguntas(this.idSala);
-
+    
     this.salas$.subscribe(async (element) => {
       this.sala = element; //dados de todas as salas
       this.salaDoc = (await getDoc(salaService.salaRef)).data(); //dados da sala da rota
     })
-
+    
     this.perguntas$.subscribe((element)=>{
-      console.log(element)
+      this.nPerguntas = this.salaService.nPerguntas
     })
     
-
-
   }
 
   googleSingIn(){
@@ -78,7 +76,11 @@ export class SalaComponent {
 
   async mandarMensagem(mensagem:string, event: Event){
     event.preventDefault();
-    this.salaService.setMensagem(this.idSala,mensagem)
+    if (this.currentNome != null) {
+      this.salaService.setMensagem(this.idSala,mensagem,this.currentNome)
+    }else{
+      console.log("erro pois currentNome é null")
+    }
   }
 
 }
