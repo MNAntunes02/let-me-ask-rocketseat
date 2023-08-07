@@ -11,7 +11,7 @@
         </div>
         <div    routerLink="/criar-sala" 
                 [ngClass]="{'hidden': !(salaDoc.donoSala == currentNome)}"
-        class="border rounded-lg border-primary text-primary bg-light px-6 py-2 font-medium ml-2 cursor-pointer">Encerrar sala</div>
+                class="border rounded-lg border-primary text-primary bg-light px-6 py-2 font-medium ml-2 cursor-pointer">Encerrar sala</div>
         <div    (click)="logout()" 
                 [ngClass]="{'hidden': currentNome == null}"
                 class="border rounded-lg  text-light bg-danger hover:bg-danger-hover transition-colors px-6 py-2 font-medium ml-2 cursor-pointer">Logout</div>
