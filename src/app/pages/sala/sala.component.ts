@@ -22,6 +22,7 @@ export class SalaComponent {
   arrDocData:any = [];
   salas$:Observable<DocumentData[]|any>;
   sala$:any;
+  todasSalas$:any;
   perguntas$:Observable<DocumentData[]|any>;
   perguntas:any
 
@@ -54,7 +55,12 @@ export class SalaComponent {
     
     this.salas$ = salaService.getSalas(this.idSala);
     this.perguntas$ = salaService.getPerguntas(this.idSala);
+    this.todasSalas$ = salaService.getTodasSalas();
     
+    // this.todasSalas$.subscribe((element:any) => {
+    //   console.log(element)
+    // })
+
     this.salas$.subscribe(async (element) => {
       this.sala = element; //dados de todas as salas
       this.salaDoc = (await getDoc(salaService.salaRef)).data(); //dados da sala da rota

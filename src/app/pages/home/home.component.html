@@ -8,8 +8,8 @@
         <img src="./assets/Logo.svg" alt="">
         <div class="w-80 flex flex-col justify-center items-center">
             <span class="poppins text-2xl font-bold mt-14">Crie uma nova sala</span>
-            <input type="text" name="" id="" placeholder="Nome da sala" class="w-full rounded-lg border border-grey-medium p-3 mt-8 bg-white">
-            <button routerLink="/sala" class="w-full rounded-lg p-3 mt-4 bg-primary text-base-color flex justify-center items-center hover:bg-primary-hover">
+            <input type="text" name="" id="" placeholder="Nome da sala" class="w-full rounded-lg border border-grey-medium p-3 mt-8 bg-white" #nomeInput>
+            <button (click)="criarSala(nomeInput.value)" class="w-full rounded-lg p-3 mt-4 bg-primary text-base-color flex justify-center items-center hover:bg-primary-hover">
                 <span>Criar sala</span>
             </button>
             <p class="text-sm text-grey-medium mt-4">Quer entrar em uma sala já existente? <button routerLink="/acesso-sala" class="text-primary">Clique aqui</button></p>

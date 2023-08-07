@@ -11,12 +11,14 @@ export class SalaService {
   idSala:string = '';
   nPerguntas:number = 0;
   sala:any;
+  salas:any;
   salaDoc:any;
   salaRef:any;
   arrDoc:any = [];
   arrDocRef:any = [];
   arrDocData:any = [];
   salas$:Observable<DocumentData[]>|any;
+  todasSalas$:any;
   sala$:any;
   perguntas$:Observable<DocumentData[]>|any;
   perguntas:any
@@ -66,9 +68,32 @@ export class SalaService {
     return this.salas$
   }
 
+  async getTodasSalas(){
+    const salasRef = collection(this.firestore, 'salas')
+    this.todasSalas$ = collectionData(salasRef)
+
+    this.todasSalas$ = this.todasSalas$.pipe(
+      map(async (objeto:any) => {
+        let arrID:any = []
+        this.salas = await getDocs(salasRef)
+        this.salas.forEach((doc:any) => {
+          arrID.push(doc.id)
+        })
+        objeto.forEach((newdoc:any, index:any)=>{
+          Object.assign(newdoc,{id:arrID[index]})
+        })
+        // console.log(objeto)
+        return objeto // Retorna o objeto atualizado
+      })
+    )
+    
+    // console.log(this.todasSalas$)
+    return await this.todasSalas$
+  }
+
   async setMensagem(idSala:string, mensagem:string, nomeUser:string){
     const salasRef = collection(this.firestore, 'salas')
-    const salaRef = doc(salasRef,"123123")
+    const salaRef = doc(salasRef,idSala)
     const perguntasRef = collection(salaRef,'perguntas')
     this.salas$ = collectionData(salasRef)
     this.perguntas$ = collectionData(perguntasRef);
@@ -80,6 +105,17 @@ export class SalaService {
       status: '1-nova', 
       likes: 0,
     });
+  }
+
+  async setSala(idSala:string, donoSala:string, nomeSala:string){
+    const salasRef = collection(this.firestore, 'salas')
+
+    await setDoc(doc(salasRef, idSala), {
+      donoSala: donoSala,
+      nomeSala: nomeSala
+    });
+
+    console.log("Efetuado setSala!!!!")
   }
 
 }
