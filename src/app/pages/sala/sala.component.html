@@ -37,7 +37,7 @@
                     <img src="./assets/user.svg" alt="">
                 </div>
                 <div *ngIf="currentNome == null,else Nome">
-                    Para enviar uma pergunta, <a href="/acesso-sala" class="text-primary">faça seu login.</a>
+                    Para enviar uma pergunta, <a href="/login" class="text-primary">faça seu login.</a>
                 </div>
                 <ng-template #Nome>
                     <span>{{currentNome}}</span>

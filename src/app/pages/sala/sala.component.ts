@@ -3,6 +3,7 @@ import { DocumentData, Firestore, collection, collectionData, collectionGroup, d
 import { ActivatedRoute } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { SalaService } from 'src/app/services/sala.service';
 
 
 @Component({
@@ -36,6 +37,7 @@ export class SalaComponent {
     private route : ActivatedRoute,
     private authService : AuthService,
     private firestore: Firestore,
+    private salaService: SalaService
   ){
 
     this.currentNome = localStorage.getItem('name');
@@ -49,32 +51,13 @@ export class SalaComponent {
     this.route.params.subscribe(
       (params: any) => this.idSala = params['idsala']
     )
-
-    const salasRef = collection(this.firestore, 'salas')
-    const salaRef = doc(salasRef,"123123")
-    const perguntasRef = collection(salaRef,'perguntas')
-    this.salas$ = collectionData(salasRef)
-    this.perguntas$ = collectionData(perguntasRef);
-
-    this.perguntas$ = this.perguntas$.pipe(
-      map(async (objeto) => {
-        let arrID:any = []
-        this.perguntas = await getDocs(perguntasRef);
-        this.perguntas.forEach((doc:any) => {
-          arrID.push(doc.id)
-        })
-        objeto.forEach((newdoc:any, index:any)=>{
-          Object.assign(newdoc,{id:arrID[index]})
-        })
-        this.nPerguntas = objeto.length
-        // console.log(objeto)
-        return objeto.sort((a:any, b:any) => b.status.localeCompare(a.status)); // Retorne o objeto atualizado
-      })
-    );
     
+    this.salas$ = salaService.getSalas(this.idSala);
+    this.perguntas$ = salaService.getPerguntas(this.idSala);
+
     this.salas$.subscribe(async (element) => {
       this.sala = element; //dados de todas as salas
-      this.salaDoc = (await getDoc(salaRef)).data(); //dados da sala da rota
+      this.salaDoc = (await getDoc(salaService.salaRef)).data(); //dados da sala da rota
     })
 
     this.perguntas$.subscribe((element)=>{
@@ -85,27 +68,17 @@ export class SalaComponent {
 
   }
 
+  googleSingIn(){
+    this.authService.googleSingIn()
+  }
+
   logout(){
     this.authService.logout()
   }
 
   async mandarMensagem(mensagem:string, event: Event){
-
     event.preventDefault();
-
-    const salasRef = collection(this.firestore, 'salas')
-    const salaRef = doc(salasRef,"123123")
-    const perguntasRef = collection(salaRef,'perguntas')
-    this.salas$ = collectionData(salasRef)
-    this.perguntas$ = collectionData(perguntasRef);
-
-
-    await setDoc(doc(perguntasRef), {
-      conteudoPergunta: mensagem,
-      nomeUser: this.currentNome,
-      status: 'nova', 
-      likes: 0,
-    });
+    this.salaService.setMensagem(this.idSala,mensagem)
   }
 
 }
