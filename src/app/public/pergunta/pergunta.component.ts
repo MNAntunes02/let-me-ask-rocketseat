@@ -17,6 +17,7 @@ export class PerguntaComponent {
   @Input() conteudoPergunta :string = '';
   @Input() likes :string = '';
   @Input() nomeUser :string = '';
+  @Input() photoUser :string = '';
 
   idSala:string = '';
   salas$:Observable<DocumentData[]|any>|any;

@@ -33,9 +33,14 @@
         </div>
         <div class="flex justify-between items-center py-4">
             <div class="flex items-center">
-                <div class="w-8 h-8 rounded-full bg-primary mr-2 flex justify-center items-center">
+                <div *ngIf="currentPhoto == null, else Photo" class="w-8 h-8 rounded-full bg-primary mr-2 flex justify-center items-center">
                     <img src="./assets/user.svg" alt="">
                 </div>
+                <ng-template #Photo>
+                    <div class="w-8 h-8 rounded-full bg-primary mr-2 flex justify-center items-center overflow-hidden">
+                        <img [src]="currentPhoto" alt="">
+                    </div>
+                </ng-template>
                 <div *ngIf="currentNome == null,else Nome">
                     Para enviar uma pergunta, <a href="/login" class="text-primary">faça seu login.</a>
                 </div>
@@ -54,6 +59,7 @@
             <app-pergunta   [status]="pergunta.status" 
                             [conteudoPergunta]="pergunta.conteudoPergunta" 
                             [nomeUser]="pergunta.nomeUser" 
+                            [photoUser]="pergunta.photoUser" 
                             [likes]="pergunta.likes"
                             [id]="pergunta.id">
             </app-pergunta>

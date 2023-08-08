@@ -14,9 +14,9 @@ export class ExcluirDialogComponent {
 
   }
 
-  excluirPergunta() {
+  async excluirPergunta() {
     if (this.data && this.data.excluir) {
-      this.data.excluir();
+      await this.data.excluir();
     }
   }
 

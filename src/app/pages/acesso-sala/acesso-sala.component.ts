@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DocumentData, getDoc } from '@angular/fire/firestore';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { SalaService } from 'src/app/services/sala.service';
 
@@ -15,14 +15,16 @@ export class AcessoSalaComponent {
   todasSalasAtualizado$: any;
   salas:any;
   salaDoc:any;
+  numeroUnico:any;
+  currentNome :string|null = '';
 
   constructor(
     private salaService: SalaService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router:Router
   ){
 
     this.todasSalas$ = this.salaService.getTodasSalas()
-
     
     this.todasSalas$.then((result:any) => {
       this.todasSalasAtualizado$ = result
@@ -37,8 +39,36 @@ export class AcessoSalaComponent {
       console.error(error);
     });
 
+    this.currentNome = localStorage.getItem('name');
+    if (this.currentNome !== null) {
+      this.currentNome = this.currentNome.replace(/["]/g, '');
+      // [this.primeiroNome, ...this.resto] = this.currentNome.split(" ");
+    }    
 
 
+  }
+
+
+  criarSala(nomeSala: string){
+    this.numeroUnico = this.gerarNumeroUnico(this.salas)
+    if(this.currentNome != null){
+      this.salaService.setSala(this.numeroUnico,this.currentNome,nomeSala)
+    }
+    console.log("Sala numero ",this.numeroUnico," criada!!")
+    this.router.navigate(['/sala/',this.numeroUnico])
+  }
+
+  gerarNumeroUnico(array: any) {
+    const min = 100000; // O menor número possível com 6 dígitos
+    const max = 999999; // O maior número possível com 6 dígitos
+  
+    while (true) {
+      const numeroGerado = Math.floor(Math.random() * (max - min + 1) + min);
+  
+      if (!array.includes(numeroGerado)) {
+        return numeroGerado.toString();
+      }
+    }
   }
 
 

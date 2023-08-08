@@ -58,6 +58,10 @@ export class SalaComponent {
       this.currentNome = this.currentNome.replace(/["]/g, '');
       // [this.primeiroNome, ...this.resto] = this.currentNome.split(" ");
     }
+    if (this.currentPhoto !== null) {
+      this.currentPhoto = this.currentPhoto.replace(/["]/g, '');
+      // [this.primeiroNome, ...this.resto] = this.currentNome.split(" ");
+    }
     
     this.salas$ = salaService.getSalas(this.idSala);
     this.perguntas$ = salaService.getPerguntas(this.idSala);
@@ -66,11 +70,15 @@ export class SalaComponent {
     this.salas$.subscribe(async (element) => {
       this.sala = element; //dados de todas as salas
       this.salaDoc = (await getDoc(salaRef)).data(); //dados da sala da rota
-      this.nPerguntas = this.salaService.nPerguntas
     })
     
     this.perguntas$.subscribe((element)=>{
-      this.nPerguntas = this.salaService.nPerguntas
+      element.then((resultado:any) => {
+        this.nPerguntas = resultado.length
+        console.log(resultado)
+      }).catch((erro:any) => {
+        console.log(erro)
+      })
     })
     
   }
@@ -85,8 +93,8 @@ export class SalaComponent {
 
   async mandarMensagem(mensagem:string, event: Event){
     event.preventDefault();
-    if (this.currentNome != null) {
-      this.salaService.setMensagem(this.idSala,mensagem,this.currentNome)
+    if (this.currentNome != null && this.currentPhoto != null) {
+      this.salaService.setMensagem(this.idSala,mensagem,this.currentNome,this.currentPhoto)
     }else{
       console.log("erro pois currentNome é null")
     }

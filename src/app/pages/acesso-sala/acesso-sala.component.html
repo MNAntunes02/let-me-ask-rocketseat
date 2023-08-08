@@ -1,24 +1,39 @@
-<main class="w-full h-screen flex">
-    <section class="w-1/2 h-full bg-primary flex flex-col justify-center items-start pl-24">
-        <img src="./assets/Illustration.svg" alt="" srcset="" class="w-80">
-        <span class="poppins text-base-color font-bold text-4xl pt-2">Toda pergunta<br/>tem uma resposta.</span>
-        <span class="text-base-color text-2xl font-normal pt-4 opacity-70">Aprenda e compartilhe conhecimento<br/>com outras pessoas</span>
-    </section>
-    <section class="w-1/2 h-full bg-light flex flex-col justify-center items-center">
+<section class="w-full h-screen flex flex-col py-16 pb-24 bg-light">
+    <div class="w-full flex justify-center items-center pb-24">
         <img src="./assets/Logo.svg" alt="">
-        <span class="poppins text-2xl font-bold mt-14">Entre em uma sala</span>
-        <div class="w-80 grid grid-cols-2 justify-center items-center p-4 gap-4 mt-4 border drop-shadow-lg rounded-lg max-h-96 overflow-y-auto">
-            <div *ngFor="let sala of salas" [routerLink]="'/sala/'+sala.id" class="border rounded-lg bg-light border-primary pr-3 pl-12 py-2 font-medium flex justify-between relative overflow-hidden cursor-pointer">
-                <div class="bg-primary h-10 w-10 absolute left-0 top-0 flex justify-center items-center">
-                    <img src="./assets/log-in 1.svg" alt="">
-                </div>
-                <span class="font-medium text-dark">#{{sala.id}}</span>
+    </div>
+    <div class="w-full h-full flex justify-center items-center">
+        <section class="w-1/2 h-full flex flex-col justify-center items-center border-r-2 border-zinc-300">
+            <div class="w-80 flex flex-col justify-center items-center">
+                <span class="poppins text-2xl font-bold">Crie uma nova sala</span>
+                <input type="text" name="" id="" placeholder="Nome da sala" class="w-full rounded-lg border border-grey-medium p-3 mt-8 bg-white" #nomeInput>
+                <button  class="w-full rounded-lg p-3 mt-4 bg-primary text-base-color flex justify-center items-center hover:bg-primary-hover">
+                    <span>Criar sala</span>
+                </button>
             </div>
-        </div>
-        <!-- <input type="text" name="" id="" placeholder="Digite o código da sala" class="w-full rounded-lg border border-grey-medium p-3 mt-8 bg-white">
-        <button routerLink="/sala/123123" class="w-full rounded-lg p-3 mt-4 bg-primary text-base-color flex justify-center items-center hover:bg-primary-hover">
-            <img src="./assets/log-in 1.svg" alt="" class="mr-4">
-            <span>Entrar na sala</span>
-        </button> -->
-    </section>
-</main>
+        </section>
+        <section class="w-1/2 h-full flex flex-col justify-center items-center">
+            <div class="w-80 flex flex-col justify-center items-center">
+                <span class="poppins text-2xl font-bold">Entre em uma sala</span>
+                <div class=" grid grid-cols-2 justify-center items-center p-4 gap-4 mt-4 border drop-shadow-lg rounded-lg max-h-96 overflow-y-auto">
+                    <div *ngFor="let sala of salas" [routerLink]="'/sala/'+sala.id" class="border rounded-lg bg-light border-primary pr-3 pl-12 py-2 font-medium flex justify-between relative overflow-hidden cursor-pointer">
+                        <div class="bg-primary h-10 w-10 absolute left-0 top-0 flex justify-center items-center">
+                            <img src="./assets/log-in 1.svg" alt="">
+                        </div>
+                        <span class="font-medium text-dark">#{{sala.id}}</span>
+                    </div>
+                </div>
+                <div class="flex justify-center text-zinc-400 w-full items-center gap-5 py-8"> 
+                    <div class="w-96 h-0 border border-zinc-300"></div>
+                    <div class="w-full text-center">ou</div>
+                    <div class="w-96 h-0 border border-zinc-300"></div> 
+                </div>
+                <input type="text" name="" id="" placeholder="Digite o código da sala" class="w-full rounded-lg border border-grey-medium p-3 bg-white">
+                <button routerLink="/sala/123123" class="w-full rounded-lg p-3 mt-4 bg-primary text-base-color flex justify-center items-center hover:bg-primary-hover">
+                    <img src="./assets/log-in 1.svg" alt="" class="mr-4">
+                    <span>Entrar na sala</span>
+                </button>
+            </div>
+        </section>
+    </div>
+</section>

@@ -33,7 +33,7 @@ export class AuthService {
       localStorage.setItem('photo', JSON.stringify(res.user?.photoURL));
       localStorage.setItem('name', JSON.stringify(res.user?.displayName));
       localStorage.setItem('email', JSON.stringify(res.user?.email));
-      this.router.navigate(['criar-sala']);
+      this.router.navigate(['acesso-sala']);
 
       const usuarios = collection(this.firestore,'usuarios')
       const document = doc(usuarios , res.user?.uid);

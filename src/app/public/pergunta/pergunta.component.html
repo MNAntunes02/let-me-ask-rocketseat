@@ -9,13 +9,18 @@
     <!-- <p class="mb-8">{{ id }}</p> -->
     <div class="flex justify-between items-center">
         <div class="flex items-center">
-            <div class="w-8 h-8 rounded-full  mr-2 flex justify-center items-center"
+            <div *ngIf="photoUser == null, else Photo" class="w-8 h-8 rounded-full  mr-2 flex justify-center items-center"
             [ngClass]="{
                 'bg-primary': status == '1-nova' || status == '0-respondendo',
                 'bg-grey-medium': status == '2-respondido'
             }">
                 <img src="./assets/user.svg" alt="">
             </div>
+            <ng-template #Photo>
+                <div class="w-8 h-8 rounded-full bg-primary mr-2 flex justify-center items-center overflow-hidden">
+                    <img [src]="photoUser" alt="">
+                </div>
+            </ng-template>
             <span class="text-grey-dark">{{ nomeUser }}</span>
         </div>
 
