@@ -24,6 +24,7 @@ import { AuthService } from './services/auth.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ExcluirDialogComponent } from './public/excluir-dialog/excluir-dialog.component';
 import { EncerrarDialogComponent } from './public/encerrar-dialog/encerrar-dialog.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { EncerrarDialogComponent } from './public/encerrar-dialog/encerrar-dialo
     AppRoutingModule,
     AngularFireAuthModule,
     MatDialogModule,
+    MatTooltipModule,
     AngularFireModule.initializeApp(environment.firebase),
     BrowserAnimationsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
