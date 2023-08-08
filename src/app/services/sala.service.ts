@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DocumentData, Firestore, collection, collectionData, doc, getDoc, getDocs, setDoc } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, map } from 'rxjs';
+import { EMPTY, Observable, defaultIfEmpty, map, of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +27,7 @@ export class SalaService {
     private route : ActivatedRoute,
     private firestore: Firestore,
   ){
-
+    
   }
 
   getPerguntas(idSala:string){
@@ -48,10 +48,10 @@ export class SalaService {
         objeto.forEach((newdoc:any, index:any)=>{
           Object.assign(newdoc,{id:arrID[index]})
         })
-        this.nPerguntas = objeto.length
-        // console.log(objeto)
-        return objeto.sort((a:any, b:any) => a.status.localeCompare(b.status)) // Retorne o objeto atualizado
-      })
+        this.nPerguntas = await objeto.length
+        return objeto.length > 0 ? objeto.sort((a:any, b:any) => a.status.localeCompare(b.status)) : EMPTY // Retorne o objeto atualizado
+      }),
+      defaultIfEmpty([])
     )
 
     return this.perguntas$
