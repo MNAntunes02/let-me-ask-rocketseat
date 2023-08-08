@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { DocumentData, Firestore, collection, collectionData, deleteDoc, doc, getDoc, query, updateDoc, where } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { ExcluirDialogComponent } from '../excluir-dialog/excluir-dialog.component';
 
 @Component({
   selector: 'app-pergunta',
@@ -31,7 +33,8 @@ export class PerguntaComponent {
 
   constructor(
     private firestore : Firestore,
-    private route : ActivatedRoute
+    private route : ActivatedRoute,
+    public dialog: MatDialog,
   ){
     
     this.currentNome = localStorage.getItem('name');
@@ -80,6 +83,17 @@ export class PerguntaComponent {
     this.perguntas$ = collectionData(perguntasRef);
 
     await deleteDoc(doc(perguntasRef,this.id));
+  }
+
+  openDialogExcluir() {
+    this.dialog.open(ExcluirDialogComponent, {
+      width: '590px',
+      height: '362px',
+      panelClass: 'panel',
+      data: {
+        excluir: () => this.excluirPergunta(),
+      }
+    });
   }
 
 }

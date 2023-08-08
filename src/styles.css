@@ -14,3 +14,14 @@ body {
 .poppins{
     font-family: 'Poppins', sans-serif;
 }
+
+.panel mat-dialog-content::-webkit-scrollbar-thumb{
+    @apply bg-violet-500 rounded-lg bg-opacity-60;
+}
+
+.panel mat-dialog-content::-webkit-scrollbar{
+    width: 5px;
+    
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

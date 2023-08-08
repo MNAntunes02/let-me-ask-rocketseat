@@ -21,6 +21,10 @@ import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { AuthService } from './services/auth.service';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ExcluirDialogComponent } from './public/excluir-dialog/excluir-dialog.component';
+import { EncerrarDialogComponent } from './public/encerrar-dialog/encerrar-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -29,12 +33,15 @@ import { AuthService } from './services/auth.service';
     SalaComponent,
     PerguntaComponent,
     LoginComponent,
-    AcessoSalaComponent
+    AcessoSalaComponent,
+    ExcluirDialogComponent,
+    EncerrarDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireAuthModule,
+    MatDialogModule,
     AngularFireModule.initializeApp(environment.firebase),
     BrowserAnimationsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
