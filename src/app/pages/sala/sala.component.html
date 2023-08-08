@@ -2,12 +2,12 @@
     <div routerLink="/login" class="cursor-pointer">
         <img src="./assets/Logo.svg" alt="" class="w-28">
     </div>
-    <div class="flex">
-        <div class="border rounded-lg bg-light border-primary pr-3 pl-12 py-2 font-medium ml-2 flex justify-between relative overflow-hidden cursor-pointer">
+    <div class="flex" >
+        <div matTooltip="Copiar" class="border rounded-lg bg-light border-primary pr-3 pl-12 py-2 font-medium ml-2 flex justify-between relative overflow-hidden cursor-pointer">
             <div class="bg-primary h-10 w-10 absolute left-0 top-0 flex justify-center items-center">
                 <img src="./assets/Icon-copy.svg" alt="">
             </div>
-            <span class="font-medium text-dark">Sala #{{idSala}}</span>
+            <span  class="font-medium text-dark">Sala #{{idSala}}</span>
         </div>
         <div    routerLink="/criar-sala" 
                 [ngClass]="{'hidden': !(salaDoc.donoSala == currentNome)}"
@@ -68,11 +68,13 @@
     </ng-template>
 
     <!-- Usada quando não tem nenhuma pergunta -->
-    <ng-template class="w-full py-32 flex flex-col justify-center items-center mt-6 text-center">
-        <img src="./assets/Ilustração.svg" alt="">
-        <span class="poppins text-lg font-semibold mt-4 text-dark">Nenhuma pergunta por aqui...</span>
-        <span class="mt-2 text-sm text-grey-dark">Envie o código desta sala para seus amigos e<br/>comece a responder perguntas!</span>
-    </ng-template>
+    <section *ngIf="nPerguntas == 0" class="w-full h-full">
+        <div class="w-full pb-16 flex flex-col justify-center items-center text-center">
+            <img src="./assets/Ilustração.svg" alt="">
+            <span class="poppins text-lg font-semibold mt-4 text-dark">Nenhuma pergunta por aqui...</span>
+            <span class="mt-2 text-sm text-grey-dark">Envie o código desta sala para seus amigos e<br/>comece a responder perguntas!</span>
+        </div>
+    </section>
 
 
 </main>

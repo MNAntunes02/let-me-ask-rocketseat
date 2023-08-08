@@ -17,6 +17,7 @@ export class SalaComponent {
   nPerguntas:number = 0;
   sala:any;
   salaDoc:any;
+  salaRef:any;
   arrDoc:any = [];
   arrDocRef:any = [];
   arrDocData:any = [];
@@ -40,6 +41,16 @@ export class SalaComponent {
     private salaService: SalaService
   ){
 
+    this.route.params.subscribe(
+      (params: any) => this.idSala = params['idsala']
+    )
+
+    const salasRef = collection(this.firestore, 'salas')
+    const salaRef = doc(salasRef,this.idSala)
+    this.salaRef = salaRef
+    const perguntasRef = collection(salaRef,'perguntas')
+
+
     this.currentNome = localStorage.getItem('name');
     this.currentPhoto = localStorage.getItem('photo');
     this.currentEmail = localStorage.getItem('email');
@@ -47,23 +58,15 @@ export class SalaComponent {
       this.currentNome = this.currentNome.replace(/["]/g, '');
       // [this.primeiroNome, ...this.resto] = this.currentNome.split(" ");
     }
-
-    this.route.params.subscribe(
-      (params: any) => this.idSala = params['idsala']
-    )
-    
     
     this.salas$ = salaService.getSalas(this.idSala);
     this.perguntas$ = salaService.getPerguntas(this.idSala);
     this.todasSalas$ = salaService.getTodasSalas();
-    
-    // this.todasSalas$.subscribe((element:any) => {
-    //   console.log(element)
-    // })
 
     this.salas$.subscribe(async (element) => {
       this.sala = element; //dados de todas as salas
-      this.salaDoc = (await getDoc(salaService.salaRef)).data(); //dados da sala da rota
+      this.salaDoc = (await getDoc(salaRef)).data(); //dados da sala da rota
+      this.nPerguntas = this.salaService.nPerguntas
     })
     
     this.perguntas$.subscribe((element)=>{

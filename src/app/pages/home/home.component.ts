@@ -21,6 +21,10 @@ export class HomeComponent {
   ){
 
     this.currentNome = localStorage.getItem('name');
+    if (this.currentNome !== null) {
+      this.currentNome = this.currentNome.replace(/["]/g, '');
+      // [this.primeiroNome, ...this.resto] = this.currentNome.split(" ");
+    }
 
     this.todasSalas$ = this.salaService.getTodasSalas()
     
