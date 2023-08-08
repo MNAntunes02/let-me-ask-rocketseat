@@ -25,7 +25,7 @@ body {
 
 .mat-mdc-snack-bar-container {
     &.blue-snackbar {
-      --mdc-snackbar-container-color: #835AFD;
+      --mdc-snackbar-container-color: #6F4BD8;
       --mat-mdc-snack-bar-button-color: #FFF;
       --mdc-snackbar-supporting-text-color: #FFF;
     }

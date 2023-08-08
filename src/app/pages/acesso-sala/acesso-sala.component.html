@@ -1,13 +1,15 @@
 <section class="w-full h-screen flex flex-col py-16 pb-24 bg-light">
-    <div class="w-full flex justify-center items-center pb-24">
-        <img src="./assets/Logo.svg" alt="">
+    <div class="w-full flex justify-center items-center pb-24 relative">
+        <img class="drop-shadow-md" src="./assets/Logo.svg" alt="">
+        <div    (click)="logout()" 
+                class="hover:shadow-sm hover:shadow-grey-dark drop-shadow rounded-lg  text-light bg-danger hover:bg-danger-hover transition-colors px-6 py-2 font-medium ml-2 cursor-pointer absolute right-32 ">Logout</div>
     </div>
     <div class="w-full h-full flex justify-center items-center divide-x-2 divide-zinc-200">
         <section class="w-full h-full flex flex-col justify-center items-center">
             <div class="w-80 flex flex-col justify-center items-center">
                 <span class="poppins text-2xl font-bold">Crie uma nova sala</span>
                 <input type="text" name="" id="" placeholder="Nome da sala" class="w-full rounded-lg border border-grey-medium p-3 mt-8 bg-white" #nomeInput>
-                <button (click)="criarSala(nomeInput.value)" class="w-full rounded-lg p-3 mt-4 bg-primary text-base-color flex justify-center items-center hover:bg-primary-hover">
+                <button (click)="criarSala(nomeInput.value)" class="hover:shadow-sm hover:shadow-grey-dark drop-shadow w-full rounded-lg p-3 mt-4 bg-primary text-base-color flex justify-center items-center hover:bg-primary-hover">
                     <span>Criar sala</span>
                 </button>
             </div>
@@ -15,8 +17,8 @@
         <section class="w-full h-full flex flex-col justify-center items-center">
             <div class="w-80 flex flex-col justify-center items-center">
                 <span class="poppins text-2xl font-bold">Entre em uma sala</span>
-                <div class=" grid grid-cols-2 justify-center items-center p-4 gap-4 mt-4 border drop-shadow-lg rounded-lg max-h-44 overflow-y-auto">
-                    <div *ngFor="let sala of salas" [routerLink]="'/sala/'+sala.id" class="border rounded-lg bg-light border-primary pr-3 pl-12 py-2 font-medium flex justify-between relative overflow-hidden cursor-pointer">
+                <div class=" grid grid-cols-2 justify-center items-center p-4 gap-4 mt-4 border shadow-inner rounded-lg max-h-44 overflow-y-auto">
+                    <div *ngFor="let sala of salas" [routerLink]="'/sala/'+sala.id" class="hover:shadow-sm hover:shadow-grey-dark border rounded-lg bg-light border-primary pr-3 pl-12 py-2 font-medium flex justify-between relative overflow-hidden cursor-pointer">
                         <div class="bg-primary h-10 w-10 absolute left-0 top-0 flex justify-center items-center">
                             <img src="./assets/log-in 1.svg" alt="">
                         </div>
@@ -29,7 +31,7 @@
                     <div class="w-96 h-0 border border-zinc-300"></div> 
                 </div>
                 <input type="text" name="" id="" placeholder="Digite o código da sala" class="w-full rounded-lg border border-grey-medium p-3 bg-white" #inputSala>
-                <button (click)="navegarRota(inputSala.value)" class="w-full rounded-lg p-3 mt-4 bg-primary text-base-color flex justify-center items-center hover:bg-primary-hover">
+                <button (click)="navegarRota(inputSala.value)" class="hover:shadow-sm hover:shadow-grey-dark w-full rounded-lg p-3 mt-4 bg-primary text-base-color flex justify-center items-center hover:bg-primary-hover">
                     <img src="./assets/log-in 1.svg" alt="" class="mr-4">
                     <span>Entrar na sala</span>
                 </button>
@@ -38,8 +40,8 @@
         <section class="w-full h-full flex flex-col justify-center items-center">
             <div class="w-80 flex flex-col justify-center items-center">
                 <span class="poppins text-2xl font-bold">Minhas salas</span>
-                <div class=" grid grid-cols-2 justify-center items-center p-4 gap-4 mt-4 border drop-shadow-lg rounded-lg max-h-96 overflow-y-auto">
-                    <div *ngFor="let sala of salas" [routerLink]="'/sala/'+sala.id" class="border rounded-lg bg-light border-primary pr-3 pl-12 py-2 font-medium flex justify-between relative overflow-hidden cursor-pointer">
+                <div class=" grid grid-cols-2 justify-center items-center p-4 gap-4 mt-4 border shadow-inner rounded-lg max-h-96 overflow-y-auto">
+                    <div *ngFor="let sala of salas" [routerLink]="'/sala/'+sala.id" class="hover:shadow-sm hover:shadow-grey-dark border rounded-lg bg-light border-primary pr-3 pl-12 py-2 font-medium flex justify-between relative overflow-hidden cursor-pointer">
                         <div class="bg-primary h-10 w-10 absolute left-0 top-0 flex justify-center items-center">
                             <img src="./assets/log-in 1.svg" alt="">
                         </div>

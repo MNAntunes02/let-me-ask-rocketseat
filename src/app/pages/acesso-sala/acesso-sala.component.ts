@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DocumentData, getDoc } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 import { SalaService } from 'src/app/services/sala.service';
 
 @Component({
@@ -20,6 +21,7 @@ export class AcessoSalaComponent {
 
   constructor(
     private salaService: SalaService,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private router:Router
   ){
@@ -70,6 +72,10 @@ export class AcessoSalaComponent {
         return numeroGerado.toString();
       }
     }
+  }
+
+  logout(){
+    this.authService.logout()
   }
 
   navegarRota(codigo:string){
