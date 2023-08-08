@@ -91,7 +91,7 @@ export class SalaService {
     return await this.todasSalas$
   }
 
-  async setMensagem(idSala:string, mensagem:string, nomeUser:string){
+  async setMensagem(idSala:string, mensagem:string, nomeUser:string, photoUser:string){
     const salasRef = collection(this.firestore, 'salas')
     const salaRef = doc(salasRef,idSala)
     const perguntasRef = collection(salaRef,'perguntas')
@@ -102,6 +102,7 @@ export class SalaService {
     await setDoc(doc(perguntasRef), {
       conteudoPergunta: mensagem,
       nomeUser: nomeUser,
+      photoUser: photoUser,
       status: '1-nova', 
       likes: 0,
     });
