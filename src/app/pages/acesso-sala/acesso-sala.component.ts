@@ -55,6 +55,7 @@ export class AcessoSalaComponent {
       this.salaService.setSala(this.numeroUnico,this.currentNome,nomeSala)
     }
     console.log("Sala numero ",this.numeroUnico," criada!!")
+    //Colocar notificação de Sala Criada
     this.router.navigate(['/sala/',this.numeroUnico])
   }
 
@@ -69,6 +70,10 @@ export class AcessoSalaComponent {
         return numeroGerado.toString();
       }
     }
+  }
+
+  navegarRota(codigo:string){
+    this.router.navigate(['sala',codigo])
   }
 
 

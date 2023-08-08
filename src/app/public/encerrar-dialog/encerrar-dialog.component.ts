@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-encerrar-dialog',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class EncerrarDialogComponent {
 
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ){
+
+  }
+
+  async excluirSala() {
+    if (this.data && this.data.excluir) {
+      await this.data.excluir();
+    }
+  }
 }

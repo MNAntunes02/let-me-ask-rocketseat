@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { DocumentData, Firestore, collection, collectionData, collectionGroup, doc, getDoc, getDocs, setDoc } from '@angular/fire/firestore';
-import { ActivatedRoute } from '@angular/router';
+import { DocumentData, Firestore, collection, collectionData, collectionGroup, deleteDoc, doc, getDoc, getDocs, setDoc } from '@angular/fire/firestore';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
+import { EncerrarDialogComponent } from 'src/app/public/encerrar-dialog/encerrar-dialog.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { SalaService } from 'src/app/services/sala.service';
 
@@ -36,9 +39,12 @@ export class SalaComponent {
 
   constructor(
     private route : ActivatedRoute,
+    private router : Router,
     private authService : AuthService,
     private firestore: Firestore,
-    private salaService: SalaService
+    private salaService: SalaService,
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog,
   ){
 
     this.route.params.subscribe(
@@ -98,6 +104,34 @@ export class SalaComponent {
     }else{
       console.log("erro pois currentNome é null")
     }
+  }
+
+  async excluirSala(){
+    const salasRef = collection(this.firestore, 'salas')
+
+    await deleteDoc(doc(salasRef,this.idSala))
+    this.router.navigate(['acesso-sala'])
+  }
+
+  openDialogExcluir() {
+    this.dialog.open(EncerrarDialogComponent, {
+      width: '590px',
+      height: '362px',
+      panelClass: 'panel',
+      data: {
+        excluir: () => this.excluirSala(),
+      }
+    });
+  }
+
+  copyCode(codigo:string){
+    navigator.clipboard.writeText(codigo)
+    this._snackBar.open('Código #'+codigo+' copiado!','',{
+      duration:3000,
+      horizontalPosition:'center',
+      verticalPosition:'top',
+      panelClass: 'blue-snackbar'
+    });
   }
 
 }

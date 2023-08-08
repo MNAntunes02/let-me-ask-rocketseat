@@ -24,6 +24,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ExcluirDialogComponent } from './public/excluir-dialog/excluir-dialog.component';
 import { EncerrarDialogComponent } from './public/encerrar-dialog/encerrar-dialog.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     BrowserModule,
     AppRoutingModule,
     AngularFireAuthModule,
+    MatSnackBarModule,
     MatDialogModule,
     MatTooltipModule,
     AngularFireModule.initializeApp(environment.firebase),

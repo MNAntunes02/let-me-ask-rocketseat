@@ -1,5 +1,5 @@
 <header class="w-full py-5 bg-light border-b border-grey-light px-40 flex justify-between items-center fixed">
-    <div routerLink="/login" class="cursor-pointer">
+    <div routerLink="/acesso-sala" class="cursor-pointer">
         <img src="./assets/Logo.svg" alt="" class="w-28">
     </div>
     <div class="flex" >
@@ -7,9 +7,9 @@
             <div class="bg-primary h-10 w-10 absolute left-0 top-0 flex justify-center items-center">
                 <img src="./assets/Icon-copy.svg" alt="">
             </div>
-            <span  class="font-medium text-dark">Sala #{{idSala}}</span>
+            <span (click)="copyCode(idSala)" class="font-medium text-dark">Sala #{{idSala}}</span>
         </div>
-        <div    routerLink="/criar-sala" 
+        <div    (click)="openDialogExcluir()"
                 [ngClass]="{'hidden': !(salaDoc.donoSala == currentNome)}"
                 class="border rounded-lg border-primary text-primary bg-light px-6 py-2 font-medium ml-2 cursor-pointer">Encerrar sala</div>
         <div    (click)="logout()" 
@@ -74,10 +74,10 @@
     </ng-template>
 
     <!-- Usada quando não tem nenhuma pergunta -->
-    <section *ngIf="nPerguntas == 0" class="w-full h-full">
+    <section *ngIf="nPerguntas == 0 || nPerguntas == null" class="w-full h-full">
         <div class="w-full pb-16 flex flex-col justify-center items-center text-center">
             <img src="./assets/Ilustração.svg" alt="">
-            <span class="poppins text-lg font-semibold mt-4 text-dark">Nenhuma pergunta por aqui...</span>
+            <span class="poppins text-lg font-semibold text-dark">Nenhuma pergunta por aqui...</span>
             <span class="mt-2 text-sm text-grey-dark">Envie o código desta sala para seus amigos e<br/>comece a responder perguntas!</span>
         </div>
     </section>
