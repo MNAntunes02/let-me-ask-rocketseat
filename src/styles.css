@@ -36,3 +36,12 @@ body {
     }
 }
 
+body::-webkit-scrollbar-thumb{
+    @apply bg-primary rounded-lg w-[2px] drop-shadow;
+}
+
+
+body::-webkit-scrollbar{
+    @apply w-[10px] bg-secondary;
+}
+
