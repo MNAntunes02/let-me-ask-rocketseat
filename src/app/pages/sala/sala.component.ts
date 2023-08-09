@@ -29,7 +29,7 @@ export class SalaComponent {
   todasSalas$:any;
   perguntas$:Observable<DocumentData[]|any>;
   perguntas:any
-
+  sidenav = false;
   currentNome :string|null = '';
   currentPhoto :string|null = '';
   currentEmail :string|null = '';
@@ -132,6 +132,14 @@ export class SalaComponent {
       verticalPosition:'top',
       panelClass: 'blue-snackbar'
     });
+  }
+
+  closeSidenav(){
+    this.sidenav = false
+  }
+  
+  openSidenav(){
+    this.sidenav = true
   }
 
 }

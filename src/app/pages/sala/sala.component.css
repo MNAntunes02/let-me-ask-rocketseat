@@ -1,0 +1,7 @@
+.open-sidenav{
+    @apply translate-x-0 block ease-out;
+}
+
+.open-back{
+    @apply block;
+}

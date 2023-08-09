@@ -23,10 +23,10 @@ export class AuthNoGuard {
           if (user) {
             // Usuário autenticado, permitir acesso à rota
             this.router.navigate(['acesso-sala']);
-            return true;
+            return false;
           } else {
             // Usuário não autenticado, redirecionar para a página de login
-            return false;
+            return true;
           }
         })
       )

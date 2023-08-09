@@ -1,8 +1,13 @@
-<header class="w-full py-5 bg-light border-b border-grey-light px-40 flex justify-between items-center fixed z-50 drop-shadow-lg">
+<header class="w-full py-5 bg-light border-b border-grey-light px-4 lg:px-40 flex justify-between items-center fixed z-20 drop-shadow-lg">
     <div routerLink="/acesso-sala" class="cursor-pointer">
         <img class="drop-shadow-sm" src="./assets/Logo.svg" alt="" class="w-28">
     </div>
-    <div class="flex" >
+    <div class="flex lg:hidden pr-2">
+        <svg (click)="openSidenav()" class="w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="#E559F9">
+            <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
+        </svg>
+    </div>
+    <div class="hidden lg:flex" >
         <div matTooltip="Copiar" class="drop-shadow hover:shadow-sm hover:shadow-grey-dark border rounded-lg bg-light border-primary pr-3 transition-all pl-12 py-2 font-medium ml-2 flex justify-between relative overflow-hidden cursor-pointer">
             <div class="bg-primary h-10 w-10 absolute left-0 top-0 flex justify-center items-center">
                 <img src="./assets/Icon-copy.svg" alt="">
@@ -18,7 +23,7 @@
     </div>
 </header>
 
-<main class="px-40 lg:px-80 pt-36 bg-light min-h-screen">
+<main class="px-4 lg:px-80 pt-36 bg-light min-h-screen">
 
     <h2 class="poppins text-2xl font-bold text-dark flex items-center mb-6">
         <span *ngIf="salaDoc">{{salaDoc.nomeSala}}</span>
@@ -31,8 +36,8 @@
         <div>
             <textarea class="shadow-inner shadow-grey-medium w-full p-4 rounded-lg min-h-[133px]" placeholder="O que você quer perguntar?" type="" #inputMensagem></textarea>
         </div>
-        <div class="flex justify-between items-center py-4">
-            <div class="flex items-center">
+        <div class="flex flex-col-reverse lg:flex-row justify-between items-center py-4 gap-4">
+            <div class="w-full flex items-center lg:justify-start justify-center">
                 <div *ngIf="currentPhoto == null, else Photo" class="w-8 h-8 rounded-full bg-primary mr-2 flex justify-center items-center">
                     <img src="./assets/user.svg" alt="">
                 </div>
@@ -50,7 +55,9 @@
             </div>
             <!-- Usado quando usario não esta logado não logado -->
             <!-- <span>Para enviar uma pergunta,  <span class="text-primary underline cursor-pointer">faça seu login.</span></span> -->
-            <button [disabled]="currentNome == null" class="drop-shadow hover:shadow-sm hover:shadow-grey-dark px-8 py-3 rounded-lg bg-primary hover:bg-primary-hover text-base-color font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed">Enviar pergunta</button>
+            <div class="w-full flex items-center justify-end">
+                <button [disabled]="currentNome == null" class="drop-shadow hover:shadow-sm hover:shadow-grey-dark px-8 py-3 rounded-lg bg-primary hover:bg-primary-hover text-base-color font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed">Enviar pergunta</button>
+            </div>
         </div>
     </form>
 
@@ -84,3 +91,39 @@
 
 
 </main>
+
+<section  class="fixed h-full top-0 bg-light z-50 right-0 duration-200 ease-in translate-x-56 drop-shadow"
+          [ngClass]="{'open-sidenav': sidenav}">
+  <div class="flex flex-col h-full justify-end items-center dm-sans p-4 text-lg text-center">
+    <div class="flex w-full justify-start h-full items-start p-4" (click)="closeSidenav()">
+        <svg class="w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
+        </svg>
+    </div>
+    <div class="flex flex-col justify-end h-full items-end gap-4" >
+        <div matTooltip="Copiar" class="drop-shadow hover:shadow-sm hover:shadow-grey-dark border rounded-lg bg-light border-primary pr-3 transition-all pl-12 py-2 font-medium ml-2 flex justify-between relative overflow-hidden cursor-pointer">
+            <div class="bg-primary h-full w-10 absolute left-0 top-0 flex justify-center items-center">
+                <img src="./assets/Icon-copy.svg" alt="">
+            </div>
+            <span (click)="copyCode(idSala)" class="font-medium text-dark">Sala #{{idSala}}</span>
+        </div>
+        <div    (click)="openDialogExcluir()"
+                [ngClass]="{'hidden': !(salaDoc.donoSala == currentNome)}"
+                class="drop-shadow hover:shadow-sm hover:shadow-grey-dark border rounded-lg border-primary text-primary bg-light transition-all px-6 py-2 font-medium ml-2 cursor-pointer">
+                Encerrar sala
+        </div>
+        <div    (click)="logout()" 
+                [ngClass]="{'hidden': currentNome == null}"
+                class="drop-shadow hover:shadow-sm hover:shadow-grey-dark rounded-lg  text-light bg-danger hover:bg-danger-hover transition-all px-6 py-2 font-medium ml-2 cursor-pointer">
+                Logout
+        </div>
+    </div>
+  </div>
+
+</section>
+
+<section  class="fixed top-0 left-0 bg-black bg-opacity-50 w-full h-full z-40 hidden"
+          [ngClass]="{'open-back': sidenav}"
+          (click)="closeSidenav()" #backdrop>
+
+</section>

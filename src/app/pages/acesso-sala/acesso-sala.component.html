@@ -1,10 +1,10 @@
-<section class="w-full h-screen flex flex-col py-16 pb-24 bg-light">
-    <div class="w-full flex justify-center items-center pb-24 relative">
-        <img class="drop-shadow-md" src="./assets/Logo.svg" alt="">
+<section class="w-full h-auto lg:h-screen flex flex-col py-16 pb-24 bg-light relative">
+    <div class="w-full flex justify-center items-center pb-24">
+        <img class="absolute top-4 left-4 lg:relative lg:top-0 lg:left-0 drop-shadow-md" src="./assets/Logo.svg" alt="">
         <div    (click)="logout()" 
-                class="hover:shadow-sm hover:shadow-grey-dark drop-shadow rounded-lg  text-light bg-danger hover:bg-danger-hover transition-colors px-6 py-2 font-medium ml-2 cursor-pointer absolute right-32 ">Logout</div>
+                class="hover:shadow-sm hover:shadow-grey-dark drop-shadow rounded-lg  text-light bg-danger hover:bg-danger-hover transition-colors px-6 py-2 font-medium ml-2 cursor-pointer absolute lg:right-32 right-4 lg:top-20 top-8">Logout</div>
     </div>
-    <div class="w-full h-full flex justify-center items-center divide-x-2 divide-zinc-200">
+    <div class="w-full h-full flex flex-col lg:flex-row justify-center items-center lg:divide-x-2 divide-y-2 lg:divide-y-0 gap-28 divide-zinc-200">
         <section class="w-full h-full flex flex-col justify-center items-center">
             <div class="w-80 flex flex-col justify-center items-center">
                 <span class="poppins text-2xl font-bold">Crie uma nova sala</span>
@@ -14,10 +14,10 @@
                 </button>
             </div>
         </section>
-        <section class="w-full h-full flex flex-col justify-center items-center">
+        <section class="w-full h-full flex flex-col justify-center items-center pt-28 lg:pt-0">
             <div class="w-80 flex flex-col justify-center items-center">
                 <span class="poppins text-2xl font-bold">Entre em uma sala</span>
-                <div class=" grid grid-cols-2 justify-center items-center p-4 gap-4 mt-4 border shadow-inner rounded-lg max-h-44 overflow-y-auto">
+                <div class=" grid grid-cols-2 justify-center items-center p-4 gap-4 mt-8 border shadow-inner rounded-lg max-h-44 overflow-y-auto">
                     <div *ngFor="let sala of salas" [routerLink]="'/sala/'+sala.id" class="hover:shadow-sm hover:shadow-grey-dark border rounded-lg bg-light border-primary pr-3 pl-12 py-2 font-medium flex justify-between relative overflow-hidden cursor-pointer">
                         <div class="bg-primary h-10 w-10 absolute left-0 top-0 flex justify-center items-center">
                             <img src="./assets/log-in 1.svg" alt="">
@@ -37,10 +37,10 @@
                 </button>
             </div>
         </section>
-        <section class="w-full h-full flex flex-col justify-center items-center">
+        <section class="w-full h-full flex flex-col justify-center items-center pt-28 lg:pt-0">
             <div class="w-80 flex flex-col justify-center items-center">
                 <span class="poppins text-2xl font-bold">Minhas salas</span>
-                <div class=" grid grid-cols-2 justify-center items-center p-4 gap-4 mt-4 border shadow-inner rounded-lg max-h-96 overflow-y-auto">
+                <div class=" grid grid-cols-2 justify-center items-center p-4 gap-4 mt-8 border shadow-inner rounded-lg max-h-96 overflow-y-auto">
                     <div *ngFor="let sala of salas" [routerLink]="'/sala/'+sala.id" class="hover:shadow-sm hover:shadow-grey-dark border rounded-lg bg-light border-primary pr-3 pl-12 py-2 font-medium flex justify-between relative overflow-hidden cursor-pointer">
                         <div class="bg-primary h-10 w-10 absolute left-0 top-0 flex justify-center items-center">
                             <img src="./assets/log-in 1.svg" alt="">
