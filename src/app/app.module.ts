@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-// import { provideAnalytics,getAnalytics,ScreenTrackingService,UserTrackingService } from '@angular/fire/';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,7 +14,6 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { provideAnalytics,getAnalytics,ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { AuthService } from './services/auth.service';
@@ -25,6 +22,8 @@ import { ExcluirDialogComponent } from './public/excluir-dialog/excluir-dialog.c
 import { EncerrarDialogComponent } from './public/encerrar-dialog/encerrar-dialog.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AuthGuard } from './guard/auth.guard'
+import { AuthNoGuard } from './guard/auth-no.guard'
 
 
 @NgModule({
@@ -40,21 +39,20 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AngularFireAuthModule,
     MatSnackBarModule,
     MatDialogModule,
     MatTooltipModule,
-    AngularFireModule.initializeApp(environment.firebase),
     BrowserAnimationsModule,
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
-    provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
 
   ],
   providers: [
-    ScreenTrackingService,UserTrackingService,AuthService
+    ScreenTrackingService,UserTrackingService,AuthService,AuthGuard,AuthNoGuard
   ],
   bootstrap: [AppComponent]
 })
