@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { DocumentData, Firestore, collection, collectionData, collectionGroup, deleteDoc, doc, getDoc, getDocs, setDoc } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -35,6 +36,7 @@ export class SalaComponent {
   currentEmail :string|null = '';
   primeiroNome :string|null = '';
   resto : any;
+  authenticated = false;
   
 
   constructor(
@@ -42,10 +44,25 @@ export class SalaComponent {
     private router : Router,
     private authService : AuthService,
     private firestore: Firestore,
+    private fireauth: AngularFireAuth,
     private salaService: SalaService,
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
   ){
+
+    this.fireauth.authState.subscribe((user) => {
+      if (user) {
+        // Usuário autenticado, permitir acesso à rota
+        this.authenticated = true;
+        console.log(this.authenticated)
+      } else {
+        // Usuário não autenticado, redirecionar para a página de login
+        this.authenticated = false;
+        console.log(this.authenticated)
+      }
+    })
+      
+    
 
     this.route.params.subscribe(
       (params: any) => this.idSala = params['idsala']
@@ -140,6 +157,10 @@ export class SalaComponent {
   
   openSidenav(){
     this.sidenav = true
+  }
+
+  checkStatusAuth(){
+    this.authService.checkAuthStatus()
   }
 
 }

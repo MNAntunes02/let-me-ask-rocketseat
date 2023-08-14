@@ -7,7 +7,7 @@
             <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
         </svg>
     </div>
-    <div class="hidden lg:flex" >
+    <div class="hidden lg:flex">
         <div matTooltip="Copiar" class="drop-shadow hover:shadow-sm hover:shadow-grey-dark border rounded-lg bg-light border-primary pr-3 transition-all pl-12 py-2 font-medium ml-2 flex justify-between relative overflow-hidden cursor-pointer">
             <div class="bg-primary h-10 w-10 absolute left-0 top-0 flex justify-center items-center">
                 <img src="./assets/Icon-copy.svg" alt="">
@@ -18,7 +18,7 @@
                 [ngClass]="{'hidden': !(salaDoc.donoSala == currentNome)}"
                 class="drop-shadow hover:shadow-sm hover:shadow-grey-dark border rounded-lg border-primary text-primary bg-light transition-all px-6 py-2 font-medium ml-2 cursor-pointer">Encerrar sala</div>
         <div    (click)="logout()" 
-                [ngClass]="{'hidden': currentNome == null}"
+                [ngClass]="{'hidden': !authenticated}"
                 class="drop-shadow hover:shadow-sm hover:shadow-grey-dark rounded-lg  text-light bg-danger hover:bg-danger-hover transition-all px-6 py-2 font-medium ml-2 cursor-pointer">Logout</div>
     </div>
 </header>
@@ -46,7 +46,7 @@
                         <img [src]="currentPhoto" alt="">
                     </div>
                 </ng-template>
-                <div *ngIf="currentNome == null,else Nome">
+                <div *ngIf="!authenticated,else Nome">
                     Para enviar uma pergunta, <a href="/login" class="text-primary">faça seu login.</a>
                 </div>
                 <ng-template #Nome>
@@ -56,7 +56,7 @@
             <!-- Usado quando usario não esta logado não logado -->
             <!-- <span>Para enviar uma pergunta,  <span class="text-primary underline cursor-pointer">faça seu login.</span></span> -->
             <div class="w-full flex items-center justify-end">
-                <button [disabled]="currentNome == null" class="drop-shadow hover:shadow-sm hover:shadow-grey-dark px-8 py-3 rounded-lg bg-primary hover:bg-primary-hover text-base-color font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed">Enviar pergunta</button>
+                <button [disabled]="!authenticated" class="drop-shadow hover:shadow-sm hover:shadow-grey-dark px-8 py-3 rounded-lg bg-primary hover:bg-primary-hover text-base-color font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed">Enviar pergunta</button>
             </div>
         </div>
     </form>
@@ -73,7 +73,7 @@
         </div>
     </section>
 
-    <!-- Usada quando não tem nenhuma pergunta -->
+    <!-- Usada quando esta fazendo carregamento das perguntas -->
     <ng-template class="w-full pb-4" #loading>
         <div class="w-full p-6 py-28 rounded-lg mb-2 bg-grey-light animate-pulse"></div>
         <div class="w-full p-6 py-28 rounded-lg mb-2 bg-grey-light animate-pulse"></div>
