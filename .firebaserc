@@ -1,14 +1,14 @@
 {
   "targets": {
-    "letmeask-1367d": {
+    "letme-ask-nlw": {
       "hosting": {
         "nlw-letmeask": [
-          "letmeask-1367d"
+          "letme-ask-nlw"
         ]
       }
     }
   },
   "projects": {
-    "default": "letmeask-1367d"
+    "default": "letme-ask-nlw"
   }
 }
