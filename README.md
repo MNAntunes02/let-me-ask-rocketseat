@@ -75,8 +75,7 @@ Contribuições são bem-vindas! Se você deseja contribuir com o LetMeAsk, siga
 ```
 5.  Abra um Pull Request descrevendo as suas alterações.
 
-# 
+***
 <div id="logo" align="center">
     <img height="50" src="https://github.com/MNAntunes02/let-me-ask-rocketseat/assets/86163211/7177f7fd-11ff-4be3-a5db-b962d30a75e9"  />
 </div>
-#
