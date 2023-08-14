@@ -2,26 +2,27 @@ import { Injectable } from '@angular/core';
 
 import { Router } from '@angular/router';
 
-import { GoogleAuthProvider , updateProfile , getAuth  } from '@angular/fire/auth';
+import { GoogleAuthProvider , getAuth, onAuthStateChanged  } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
-import { Firestore, collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
+import { Firestore, collection, doc, getDocs, setDoc } from '@angular/fire/firestore';
+import { map } from 'rxjs';
 
-import{ getStorage , ref , uploadBytes  } from '@angular/fire/storage'
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  authenticated: boolean = false;
+  userLoggedIn: any;
 
   constructor(
     private fireauth: AngularFireAuth,
     private firestore: Firestore,
     private router: Router,
   ){
-
-    
+    this.checkAuthStatus()
   }
 
   //login com google
@@ -76,4 +77,20 @@ export class AuthService {
     return uids;
   }
 
+  checkAuthStatus() {
+    return this.fireauth.authState.pipe(
+      map((user) => {
+        if (user) {
+          // Usuário autenticado, permitir acesso à rota
+          this.authenticated = true;
+        } else {
+          // Usuário não autenticado, redirecionar para a página de login
+          this.authenticated = false;
+        }
+      })
+    )
+  }
+
 }
+
+
