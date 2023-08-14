@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
 import { DocumentData, getDoc } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -26,6 +27,18 @@ export class AcessoSalaComponent {
     private router:Router
   ){
 
+    // const auth = getAuth();
+    // onAuthStateChanged(auth, (user) => {
+    //   if (user) {
+    //     console.log('userIf => ',user);
+    //     // ...
+    //   } else {
+    //     console.log('userElse => ',user);
+    //   }
+    // });
+
+    // console.log('getAuth => ',auth);
+    
     this.todasSalas$ = this.salaService.getTodasSalas()
     
     this.todasSalas$.then((result:any) => {
