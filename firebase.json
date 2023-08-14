@@ -1,9 +1,24 @@
 {
   "hosting": [
     {
+      "source": ".",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "frameworksBackend": {
+        "region": "us-east1"
+      }
+    },
+    {
       "target": "nlw-letmeask",
       "source": ".",
       "frameworksBackend": {}
     }
-  ]
+  ],
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  }
 }
