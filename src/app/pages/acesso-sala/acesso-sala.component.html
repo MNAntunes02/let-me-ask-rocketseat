@@ -1,20 +1,20 @@
 <section class="w-full h-auto lg:h-screen flex flex-col py-16 pb-24 bg-light relative">
-    <div class="w-full flex justify-center items-center pb-24">
-        <img class="absolute top-4 left-4 lg:relative lg:top-0 lg:left-0 drop-shadow-md" src="./assets/Logo.svg" alt="">
+    <div class="w-full flex justify-center items-center pb-0 lg:pb-24">
+        <img class="absolute top-4 left-4 lg:relative lg:top-0 lg:left-0 drop-shadow-md h-16" src="./assets/Logo.svg" alt="">
         <div    (click)="logout()" 
                 class="hover:shadow-sm hover:shadow-grey-dark drop-shadow rounded-lg  text-light bg-danger hover:bg-danger-hover transition-colors px-6 py-2 font-medium ml-2 cursor-pointer absolute lg:right-32 right-4 lg:top-20 top-8">Logout</div>
     </div>
     <div class="w-full h-full flex flex-col lg:flex-row justify-center items-center lg:divide-x-2 divide-y-2 lg:divide-y-0 divide-zinc-200">
-        <section class="w-full h-full flex flex-col justify-center items-center">
+        <section class="w-full h-full flex flex-col justify-center pt-28 lg:pt-0 pb-28 lg:pb-0 items-center">
             <div class="w-80 flex flex-col justify-center items-center">
                 <span class="poppins text-2xl font-bold">Crie uma nova sala</span>
                 <input type="text" name="" id="" placeholder="Nome da sala" class="w-full rounded-lg border border-grey-medium p-3 mt-8 bg-white" #nomeInput>
                 <button (click)="criarSala(nomeInput.value)" class="hover:shadow-sm hover:shadow-grey-dark drop-shadow w-full rounded-lg p-3 mt-4 bg-primary text-base-color flex justify-center items-center hover:bg-primary-hover">
-                    <span>Criar sala</span>
+                    <span class="font-medium">Criar sala</span>
                 </button>
             </div>
         </section>
-        <section class="w-full h-full flex flex-col justify-center items-center pt-28 lg:pt-0">
+        <section class="w-full h-full flex flex-col justify-center items-center pt-28 lg:pt-0 pb-28 lg:pb-0">
             <div class="w-80 flex flex-col justify-center items-center">
                 <span class="poppins text-2xl font-bold">Entre em uma sala</span>
                 <div class=" grid grid-cols-2 justify-center items-center p-4 gap-4 mt-8 border shadow-inner rounded-lg max-h-44 overflow-y-auto">
@@ -31,13 +31,13 @@
                     <div class="w-96 h-0 border border-zinc-300"></div> 
                 </div>
                 <input type="text" name="" id="" placeholder="Digite o código da sala" class="w-full rounded-lg border border-grey-medium p-3 bg-white" #inputSala>
-                <button (click)="navegarRota(inputSala.value)" class="hover:shadow-sm hover:shadow-grey-dark w-full rounded-lg p-3 mt-4 bg-primary text-base-color flex justify-center items-center hover:bg-primary-hover">
+                <button (click)="navegarRota(inputSala.value)" class="hover:shadow-sm hover:shadow-grey-dark w-full font-medium rounded-lg p-3 mt-4 bg-primary text-base-color flex justify-center items-center hover:bg-primary-hover">
                     <img src="./assets/log-in 1.svg" alt="" class="mr-4">
                     <span>Entrar na sala</span>
                 </button>
             </div>
         </section>
-        <section class="w-full h-full flex flex-col justify-center items-center pt-28 lg:pt-0">
+        <section class="w-full h-full flex flex-col justify-center items-center pt-28 lg:pt-0 pb-28 lg:pb-0">
             <div class="w-80 flex flex-col justify-center items-center">
                 <span class="poppins text-2xl font-bold">Minhas salas</span>
                 <div class=" grid grid-cols-2 justify-center items-center p-4 gap-4 mt-8 border shadow-inner rounded-lg max-h-96 overflow-y-auto">
