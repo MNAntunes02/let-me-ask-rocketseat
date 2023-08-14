@@ -10,6 +10,12 @@ O LetMeAsk é um aplicativo web de Perguntas e Respostas, iniciado pela  [Rocket
 
 Confira o [Design do Projeto no Figma](https://www.figma.com/file/tKX49E57zf0Z757uCdB0MG/Letmeask-(Community)?type=design&node-id=45-29844&mode=design&t=nvopkXPLRHVcSbeI-0), onde você pode explorar o layout e os detalhes visuais do LetMeAsk.
 
+### 👨‍💻 Tecnologias
+
+-   [Angular](https://angular.io/)
+-   [Firebase](https://firebase.google.com/)
+-   [Tailwind CSS](https://tailwindcss.com/)
+
 ### 👀 Funcionalidades Principais
 
 -   **Crie Salas:** Crie uma sala para o seu evento e compartilhe o código único com os participantes.
